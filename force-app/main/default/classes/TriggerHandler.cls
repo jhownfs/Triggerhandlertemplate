@@ -1,18 +1,29 @@
 public virtual class TriggerHandler {
-    
 
-  Map<String, Void> methods = new Map<String, Void>{
-    'BEFORE_INSERT' => beforeInsert(),
-    'BEFORE_UPDATE' => beforeUpdate(),
-    'BEFORE_DELETE' => beforeDelete(),
-    'AFTER_INSERT' => afterInsert(),
-    'AFTER_UPDATE' => afterUpdate(),
-    'AFTER_DELETE' => afterDelete(),
-    'AFTER_UNDELETE' => afterUndelete()
-  };
-
-  private void run(){
-      
+  public void run(){
+    switch on Trigger.operationType {
+      when BEFORE_INSERT {
+          this.beforeInsert() ;
+      }
+      when BEFORE_UPDATE {
+          this.beforeUpdate();
+      }
+      when BEFORE_DELETE {
+          this.beforeDelete();
+      }
+       when AFTER_INSERT {
+          this.afterInsert();
+      }
+      when AFTER_UPDATE {
+          this.afterUpdate();
+      }
+      when AFTER_DELETE {
+          this.afterDelete();
+      }
+      when AFTER_UNDELETE {
+        this.afterUndelete();
+      }
+    }
   }
 
   public virtual void beforeInsert(){}
